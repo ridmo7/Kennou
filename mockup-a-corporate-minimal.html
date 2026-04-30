@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kennou — Option A: Clean Corporate Minimal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --navy: #0f172a;
+            --navy-light: #1e293b;
+            --white: #ffffff;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-400: #94a3b8;
+            --gray-600: #475569;
+            --gold: #d97706;
+            --gold-light: #fbbf24;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--navy);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--navy);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--navy); }
+
+        .nav-cta {
+            background: var(--navy);
+            color: var(--white) !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600 !important;
+        }
+
+        /* HERO */
+        .hero {
+            padding: 8rem 4rem;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--navy);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover { background: var(--navy-light); }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            background: var(--gray-50);
+            padding: 6rem 4rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .how-it-works h2 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gray-400);
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            max-width: 1100px;
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--gray-200);
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.3px;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* MODULES PREVIEW */
+        .modules-section {
+            padding: 6rem 4rem;
+        }
+
+        .modules-section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .modules-section > p {
+            color: var(--gray-600);
+            margin-bottom: 3rem;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--gray-200);
+            border: 1px solid var(--gray-200);
+        }
+
+        .module-card {
+            background: var(--white);
+            padding: 2.5rem;
+        }
+
+        .module-card .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .module-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-card p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* SUCCESS STORIES */
+        .success-section {
+            background: var(--navy);
+            color: var(--white);
+            padding: 6rem 4rem;
+        }
+
+        .success-section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 3rem;
+        }
+
+        .success-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .success-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 4px;
+        }
+
+        .success-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--navy-light);
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 2px solid var(--gold);
+        }
+
+        .success-card h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .success-card .role {
+            font-size: 0.8rem;
+            color: var(--gold-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .success-card p {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 3rem 4rem;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+
+        /* LABEL */
+        .mockup-label {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--gold);
+            color: var(--navy);
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 999;
+        }
+
+        body { padding-top: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="mockup-label">Option A — Clean Corporate Minimal</div>
+
+    <nav>
+        <div class="logo">Kennou</div>
+        <ul class="nav-links">
+            <li><a href="#">Programme</a></li>
+            <li><a href="#">Success Stories</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#" class="nav-cta">Apply Now</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Your career starts with <span>preparation.</span></h1>
+        <p>Kennou is a structured employability programme for young people from disadvantaged backgrounds. Complete the training. Prove your readiness. Get placed into meaningful corporate roles.</p>
+        <a href="#" class="btn-primary">Check Your Eligibility →</a>
+    </section>
+
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Apply & Qualify</h3>
+                <p>Complete a short eligibility check. We work with young people from the most deprived areas in the UK.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Complete the Programme</h3>
+                <p>Work through our presentation packs on emotional intelligence, interviews, networking, and more. You have two weeks.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Interview & Get Placed</h3>
+                <p>Present what you've learned. If you're ready, we connect you directly with our corporate partners.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules-section">
+        <h2>Programme Modules</h2>
+        <p>Structured content designed to get you corporate-ready.</p>
+        <div class="modules-grid">
+            <div class="module-card">
+                <div class="tag">Module 01</div>
+                <h3>Emotional Intelligence</h3>
+                <p>Understanding yourself and others in professional settings.</p>
+            </div>
+            <div class="module-card">
+                <div class="tag">Module 02</div>
+                <h3>Interview Preparation</h3>
+                <p>Techniques, frameworks, and practice for corporate interviews.</p>
+            </div>
+            <div class="module-card">
+                <div class="tag">Module 03</div>
+                <h3>Professional Networking</h3>
+                <p>Building genuine connections that lead to opportunities.</p>
+            </div>
+            <div class="module-card">
+                <div class="tag">Module 04</div>
+                <h3>Communication Skills</h3>
+                <p>Presenting ideas clearly and confidently in any setting.</p>
+            </div>
+            <div class="module-card">
+                <div class="tag">Module 05</div>
+                <h3>Corporate Culture</h3>
+                <p>Navigating workplace norms, expectations, and dynamics.</p>
+            </div>
+            <div class="module-card">
+                <div class="tag">Module 06</div>
+                <h3>Personal Branding</h3>
+                <p>CV writing, LinkedIn presence, and crafting your story.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="success-section">
+        <h2>Success Stories</h2>
+        <div class="success-grid">
+            <div class="success-card">
+                <div class="success-avatar"></div>
+                <h4>Amara K.</h4>
+                <div class="role">Graduate Analyst — HSBC</div>
+                <p>"Kennou gave me the structure and confidence I needed. I went from not knowing how to network to landing my dream role."</p>
+            </div>
+            <div class="success-card">
+                <div class="success-avatar"></div>
+                <h4>Jordan M.</h4>
+                <div class="role">Operations Associate — Deloitte</div>
+                <p>"The programme was intense but worth it. The interview prep changed everything for me."</p>
+            </div>
+            <div class="success-card">
+                <div class="success-avatar"></div>
+                <h4>Priya S.</h4>
+                <div class="role">Junior Consultant — Accenture</div>
+                <p>"I didn't think corporate was for people like me. Kennou showed me I was wrong."</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">Kennou</div>
+        <p>© 2026 Kennou. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kennou — Option B4: Modern Blue</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --deep: #0f1729;
+            --navy: #1e293b;
+            --blue: #2563eb;
+            --blue-light: #3b82f6;
+            --blue-bright: #60a5fa;
+            --blue-soft: #dbeafe;
+            --blue-pale: #eff6ff;
+            --white: #ffffff;
+            --cream: #f8fafc;
+            --gray-400: #94a3b8;
+            --gray-600: #475569;
+            --sky: #0ea5e9;
+            --sky-soft: #e0f2fe;
+            --amber: #f59e0b;
+            --amber-soft: #fef3c7;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            color: var(--deep);
+            background: var(--cream);
+            line-height: 1.6;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            background: var(--white);
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 2px 20px rgba(15, 23, 41, 0.04);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--deep);
+        }
+
+        .logo span {
+            color: var(--blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--deep); }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--blue), var(--sky));
+            color: var(--white) !important;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 6rem 4rem;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-content { flex: 1; }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-illustration {
+            width: 380px;
+            height: 380px;
+            background: linear-gradient(135deg, var(--blue-soft), var(--sky-soft));
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-illustration::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            top: -30px;
+            right: -30px;
+        }
+
+        .hero-illustration::after {
+            content: '🚀';
+            font-size: 5rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--blue-soft);
+            color: var(--blue);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--blue), var(--sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--gray-600);
+            max-width: 500px;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--blue), var(--sky));
+            color: var(--white);
+            padding: 1.1rem 2.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.25);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            margin-left: 1rem;
+            color: var(--deep);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 1.1rem 1.5rem;
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            padding: 6rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--blue);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .how-it-works h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .step {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(15, 23, 41, 0.04);
+            transition: transform 0.2s;
+        }
+
+        .step:hover { transform: translateY(-4px); }
+
+        .step-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step:nth-child(1) .step-icon { background: var(--blue-soft); }
+        .step:nth-child(2) .step-icon { background: var(--sky-soft); }
+        .step:nth-child(3) .step-icon { background: var(--amber-soft); }
+
+        .step h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* MODULES */
+        .modules-section {
+            padding: 6rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .modules-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .modules-section > p {
+            color: var(--gray-600);
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .module-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(15, 23, 41, 0.04);
+            border-left: 4px solid transparent;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .module-card:hover {
+            border-left-color: var(--blue);
+            transform: translateY(-2px);
+        }
+
+        .module-card .module-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--blue-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .module-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-card p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .module-card .duration {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--gray-400);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* SUCCESS STORIES */
+        .success-section {
+            background: var(--deep);
+            color: var(--white);
+            padding: 6rem 4rem;
+            margin: 4rem 2rem;
+            border-radius: 32px;
+        }
+
+        .success-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .success-section .section-label {
+            color: var(--blue-bright);
+        }
+
+        .success-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+        }
+
+        .success-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .success-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: background 0.2s;
+        }
+
+        .success-card:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .success-avatar {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--blue), var(--sky));
+            border-radius: 50%;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .success-card h4 {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .success-card .role {
+            font-size: 0.85rem;
+            color: var(--blue-bright);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .success-card p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            padding: 6rem 4rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-section p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 3rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(15, 23, 41, 0.08);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--gray-400);
+            font-size: 0.85rem;
+        }
+
+        /* LABEL */
+        .mockup-label {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--blue), var(--sky));
+            color: var(--white);
+            text-align: center;
+            padding: 0.6rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 999;
+        }
+
+        body { padding-top: 2.2rem; }
+    </style>
+</head>
+<body>
+    <div class="mockup-label">Option B4 — Modern Blue</div>
+
+    <nav>
+        <div class="logo">Kennou<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Programme</a></li>
+            <li><a href="#">Success Stories</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#" class="nav-cta">Apply Now</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🎯 Free for eligible young people</div>
+            <h1>Get corporate-ready.<br><span class="highlight">Get placed.</span></h1>
+            <p>A structured employability programme for young people from disadvantaged backgrounds. Build real skills. Prove you're ready. We'll open the doors.</p>
+            <a href="#" class="btn-primary">Check Your Eligibility</a>
+            <a href="#" class="btn-secondary">How it works ↓</a>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-illustration"></div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="section-label">The Process</div>
+        <h2>Three steps to your career</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">📋</div>
+                <h3>Apply & Qualify</h3>
+                <p>Quick eligibility check based on your background. We're here for those who need it most.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">📚</div>
+                <h3>Learn & Build</h3>
+                <p>Two weeks of focused development. Emotional intelligence, interview skills, networking — all the tools you need.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">🤝</div>
+                <h3>Present & Get Placed</h3>
+                <p>Show us what you've learned. If you're ready, we connect you with our corporate partners directly.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules-section">
+        <div class="section-label">Curriculum</div>
+        <h2>What you'll learn</h2>
+        <p>Practical skills designed by someone who's placed people into top firms.</p>
+        <div class="modules-grid">
+            <div class="module-card">
+                <div class="module-num">Module 01</div>
+                <h3>Emotional Intelligence</h3>
+                <p>Understanding yourself and reading rooms in professional settings.</p>
+                <div class="duration">⏱ 3 videos • ~45 min</div>
+            </div>
+            <div class="module-card">
+                <div class="module-num">Module 02</div>
+                <h3>Interview Mastery</h3>
+                <p>Frameworks, techniques, and practice that actually work.</p>
+                <div class="duration">⏱ 4 videos • ~60 min</div>
+            </div>
+            <div class="module-card">
+                <div class="module-num">Module 03</div>
+                <h3>Professional Networking</h3>
+                <p>Building genuine connections without feeling fake.</p>
+                <div class="duration">⏱ 3 videos • ~40 min</div>
+            </div>
+            <div class="module-card">
+                <div class="module-num">Module 04</div>
+                <h3>Communication & Presence</h3>
+                <p>Speaking clearly, presenting confidently, owning the room.</p>
+                <div class="duration">⏱ 3 videos • ~50 min</div>
+            </div>
+            <div class="module-card">
+                <div class="module-num">Module 05</div>
+                <h3>Corporate Culture</h3>
+                <p>The unwritten rules nobody tells you about.</p>
+                <div class="duration">⏱ 2 videos • ~30 min</div>
+            </div>
+            <div class="module-card">
+                <div class="module-num">Module 06</div>
+                <h3>Personal Branding</h3>
+                <p>Your CV, LinkedIn, and the story that makes people remember you.</p>
+                <div class="duration">⏱ 3 videos • ~45 min</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="success-section">
+        <div class="success-inner">
+            <div class="section-label">Real Results</div>
+            <h2>People we've placed</h2>
+            <div class="success-grid">
+                <div class="success-card">
+                    <div class="success-avatar">AK</div>
+                    <h4>Amara K.</h4>
+                    <div class="role">Graduate Analyst — HSBC</div>
+                    <p>"Kennou gave me structure when I had none. I went from not knowing where to start to landing my dream role in 3 months."</p>
+                </div>
+                <div class="success-card">
+                    <div class="success-avatar">JM</div>
+                    <h4>Jordan M.</h4>
+                    <div class="role">Operations Associate — Deloitte</div>
+                    <p>"The interview prep alone was worth it. But it was the confidence I built that really changed things for me."</p>
+                </div>
+                <div class="success-card">
+                    <div class="success-avatar">PS</div>
+                    <h4>Priya S.</h4>
+                    <div class="role">Junior Consultant — Accenture</div>
+                    <p>"I didn't think corporate was for people like me. Kennou showed me I belonged there all along."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to invest in yourself?</h2>
+        <p>It takes two weeks of focus. If you're serious about your future, this is where it starts.</p>
+        <a href="#" class="btn-primary">Apply Now — It's Free</a>
+    </section>
+
+    <footer>
+        <div class="logo">Kennou<span>.</span></div>
+        <ul class="footer-links">
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <p>© 2026 Kennou. All rights reserved.</p>
+    </footer>
+</body>
+</html>
