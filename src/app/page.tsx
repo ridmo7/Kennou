@@ -34,12 +34,10 @@ export default function Home() {
           </div>
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="relative">
-            <div className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-coral-soft/50 to-amber-soft/50 rounded-3xl" />
-            <div className="relative">
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 text-center">Recent Placements</p>
-              <HeroCarousel />
-            </div>
+          <div className="text-center">
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Recent Placements</p>
+            <HeroCarousel />
+            <p className="text-xs text-gray-400 mt-4">8 young people placed this cohort</p>
           </div>
         </div>
       </section>
