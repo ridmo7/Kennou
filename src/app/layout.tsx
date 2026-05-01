@@ -3,6 +3,8 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { AuthProvider } from "@/context/AuthContext";
+import { ToastProvider } from "@/context/ToastContext";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -13,6 +15,12 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Kennou — Get Corporate-Ready. Get Placed.",
   description: "A structured employability programme for young people from disadvantaged backgrounds.",
+  icons: { icon: "/favicon.svg" },
+  openGraph: {
+    title: "Kennou — Get Corporate-Ready. Get Placed.",
+    description: "A structured employability programme for young people from disadvantaged backgrounds.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -23,9 +31,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <AuthProvider>
+          <ToastProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </ToastProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,3 +1,7 @@
+"use client";
+
+import { ScrollReveal } from "@/components/ScrollReveal";
+
 export default function SuccessStoriesPage() {
   const stories = [
     { initials: "AK", name: "Amara K.", role: "Graduate Analyst — HSBC", quote: "Kennou gave me structure when I had none. I went from not knowing where to start to landing my dream role in 3 months.", bg: "from-coral to-amber" },
@@ -9,25 +13,41 @@ export default function SuccessStoriesPage() {
   ];
 
   return (
-    <div className="px-6 md:px-16 py-16 max-w-7xl mx-auto">
+    <div className="px-6 md:px-16 py-16 max-w-7xl mx-auto animate-fade-in">
       <p className="text-sm uppercase tracking-widest text-coral font-bold mb-3">Real Results</p>
       <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">Success Stories</h1>
       <p className="text-gray-600 mb-12 text-lg max-w-2xl leading-relaxed">
         Real people. Real placements. These are the young people we&apos;ve helped get into meaningful corporate roles.
       </p>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {stories.map((story) => (
-          <div key={story.initials} className="bg-white p-6 rounded-2xl shadow-sm hover:-translate-y-1 transition-transform">
-            <div className={`w-16 h-16 bg-gradient-to-br ${story.bg} rounded-full flex items-center justify-center text-white font-bold text-xl mb-4`}>
-              {story.initials}
+      <ScrollReveal>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {stories.map((story) => (
+            <div key={story.initials} className="bg-white p-6 rounded-2xl shadow-sm hover:-translate-y-1 transition-transform">
+              <div className={`w-16 h-16 bg-gradient-to-br ${story.bg} rounded-full flex items-center justify-center text-white font-bold text-xl mb-4`}>
+                {story.initials}
+              </div>
+              <h3 className="font-bold text-lg">{story.name}</h3>
+              <p className="text-coral text-sm font-medium mb-3">{story.role}</p>
+              <p className="text-gray-600 text-sm italic leading-relaxed">&ldquo;{story.quote}&rdquo;</p>
             </div>
-            <h3 className="font-bold text-lg">{story.name}</h3>
-            <p className="text-coral text-sm font-medium mb-3">{story.role}</p>
-            <p className="text-gray-600 text-sm italic leading-relaxed">&ldquo;{story.quote}&rdquo;</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </ScrollReveal>
+
+      {/* Bottom CTA */}
+      <ScrollReveal>
+        <div className="text-center mt-16">
+          <h2 className="text-xl font-extrabold mb-2">Your story could be next.</h2>
+          <p className="text-gray-600 text-sm mb-6">Check your eligibility and join the programme today.</p>
+          <a
+            href="/apply"
+            className="inline-block bg-gradient-to-br from-coral to-amber text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-coral/30 hover:-translate-y-0.5 transition-transform"
+          >
+            Apply Now
+          </a>
+        </div>
+      </ScrollReveal>
     </div>
   );
 }
