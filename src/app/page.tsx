@@ -33,12 +33,8 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="flex-1 flex justify-center">
-          <div className="text-center">
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Recent Placements</p>
-            <HeroCarousel />
-            <p className="text-xs text-gray-400 mt-4">8 young people placed this cohort</p>
-          </div>
+        <div className="flex-1 flex justify-center md:justify-end">
+          <HeroCarousel />
         </div>
       </section>
 
