@@ -6,7 +6,7 @@ export default function AboutPage() {
   return (
     <div className="animate-fade-in">
       {/* Hero */}
-      <section className="px-6 md:px-16 pt-20 pb-14 max-w-4xl mx-auto text-center">
+      <section className="px-6 md:px-16 pt-20 pb-8 max-w-5xl mx-auto text-center">
         <p className="text-sm uppercase tracking-widest text-coral font-bold mb-3">About Us</p>
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
           We believe talent is everywhere.{" "}
@@ -20,7 +20,7 @@ export default function AboutPage() {
 
       {/* Mission */}
       <ScrollReveal>
-        <section className="px-6 md:px-16 py-14 max-w-3xl mx-auto">
+        <section className="px-6 md:px-16 py-8 max-w-5xl mx-auto">
           <h2 className="text-2xl font-extrabold mb-6 text-center">Our Mission</h2>
           <p className="text-gray-600 text-lg leading-[1.85] mb-5 text-center">
             Kennou is a structured, two-week employability programme that takes young people from disadvantaged
@@ -39,7 +39,7 @@ export default function AboutPage() {
 
       {/* Stats strip */}
       <ScrollReveal>
-        <section className="px-6 md:px-16 py-12 max-w-3xl mx-auto">
+        <section className="px-6 md:px-16 py-8 max-w-5xl mx-auto">
           <div className="flex items-center justify-center gap-0">
             <div className="flex-1 text-center">
               <p className="text-4xl md:text-5xl font-extrabold text-deep-purple">200+</p>
