@@ -42,19 +42,8 @@ export default function AboutPage() {
       {/* Mission */}
       <ScrollReveal>
         <section className="px-6 md:px-16 py-14 max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="bg-white rounded-3xl p-10 shadow-sm flex flex-col items-center justify-center text-center min-h-[220px]">
-              <div className={`transition-opacity duration-300 ${fade ? "opacity-100" : "opacity-0"}`}>
-                <p className="text-6xl md:text-7xl font-extrabold text-deep-purple leading-none">{stats[statIndex].value}</p>
-                <p className="text-sm text-gray-500 mt-2">{stats[statIndex].label}</p>
-              </div>
-              <div className="flex gap-1.5 mt-5">
-                {stats.map((_, i) => (
-                  <div key={i} className={`rounded-full transition-all duration-300 ${i === statIndex ? "w-5 h-1.5 bg-coral" : "w-1.5 h-1.5 bg-gray-200"}`} />
-                ))}
-              </div>
-            </div>
-            <div>
+          <div className="grid md:grid-cols-3 gap-8 items-center">
+            <div className="md:col-span-2">
               <h2 className="text-2xl font-extrabold mb-4">Our Mission</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
                 Kennou is a structured, two-week employability programme that takes young people from disadvantaged
@@ -65,6 +54,17 @@ export default function AboutPage() {
                 We focus on the people who traditional career services overlook — those eligible for free school
                 meals, living in the most deprived areas, and from low-income households.
               </p>
+            </div>
+            <div className="bg-white rounded-3xl py-10 px-6 shadow-sm flex flex-col items-center justify-center text-center">
+              <div className={`transition-opacity duration-300 ${fade ? "opacity-100" : "opacity-0"}`}>
+                <p className="text-5xl md:text-6xl font-extrabold text-deep-purple leading-none">{stats[statIndex].value}</p>
+                <p className="text-sm text-gray-500 mt-2">{stats[statIndex].label}</p>
+              </div>
+              <div className="flex gap-1.5 mt-4">
+                {stats.map((_, i) => (
+                  <div key={i} className={`rounded-full transition-all duration-300 ${i === statIndex ? "w-5 h-1.5 bg-coral" : "w-1.5 h-1.5 bg-gray-200"}`} />
+                ))}
+              </div>
             </div>
           </div>
         </section>
