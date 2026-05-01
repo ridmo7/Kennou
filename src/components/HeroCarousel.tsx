@@ -1,71 +1,100 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 
 const placements = [
-  { name: "Amara K.", role: "Graduate Analyst", company: "HSBC", quote: "Kennou gave me structure when I had none.", img: "/avatars/avatar-1.jpg" },
-  { name: "Jordan M.", role: "Ops Associate", company: "Deloitte", quote: "The confidence I built changed everything.", img: "/avatars/avatar-2.jpg" },
-  { name: "Priya S.", role: "Junior Consultant", company: "Accenture", quote: "Kennou showed me I belonged in corporate.", img: "/avatars/avatar-3.jpg" },
-  { name: "David W.", role: "Business Analyst", company: "PwC", quote: "From a council estate to PwC. Unreal.", img: "/avatars/avatar-4.jpg" },
-  { name: "Safia H.", role: "Marketing Exec", company: "Unilever", quote: "Doors I didn't know existed opened up.", img: "/avatars/avatar-5.jpg" },
-  { name: "Liam T.", role: "Tech Analyst", company: "KPMG", quote: "Two weeks that changed my whole trajectory.", img: "/avatars/avatar-6.jpg" },
+  { name: "Amara K.", role: "Graduate Analyst", company: "HSBC", quote: "Kennou gave me structure when I had none. I went from lost to landed.", img: "/avatars/avatar-1.jpg" },
+  { name: "Jordan M.", role: "Ops Associate", company: "Deloitte", quote: "The confidence I built here changed everything about how I show up.", img: "/avatars/avatar-2.jpg" },
+  { name: "Priya S.", role: "Junior Consultant", company: "Accenture", quote: "I never thought corporate was for someone like me. Kennou proved me wrong.", img: "/avatars/avatar-3.jpg" },
+  { name: "David W.", role: "Business Analyst", company: "PwC", quote: "From a council estate to PwC in three months. Still doesn't feel real.", img: "/avatars/avatar-4.jpg" },
+  { name: "Safia H.", role: "Marketing Exec", company: "Unilever", quote: "Doors I didn't even know existed started opening up for me.", img: "/avatars/avatar-5.jpg" },
+  { name: "Liam T.", role: "Tech Analyst", company: "KPMG", quote: "Two weeks of work changed the entire trajectory of my career.", img: "/avatars/avatar-6.jpg" },
 ];
 
-function Card({ person, className }: { person: (typeof placements)[0]; className?: string }) {
-  return (
-    <div className={`absolute inset-0 bg-white rounded-3xl shadow-lg flex items-stretch overflow-hidden ${className ?? ""}`}>
-      {/* Square photo */}
-      <div className="relative w-[140px] shrink-0 bg-gradient-to-br from-coral-soft to-amber-soft">
-        <Image src={person.img} alt={person.name} fill className="object-cover" sizes="140px" />
-      </div>
-      {/* Content */}
-      <div className="flex-1 px-5 py-5 flex flex-col justify-center min-w-0">
-        <span className="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-full self-start mb-2">Placed ✓</span>
-        <p className="font-bold text-[15px] leading-tight">{person.name}</p>
-        <p className="text-xs text-gray-500 mt-0.5">{person.role}</p>
-        <p className="text-xs font-semibold text-coral">{person.company}</p>
-        <p className="text-[13px] text-gray-400 italic mt-3 leading-relaxed">&ldquo;{person.quote}&rdquo;</p>
-      </div>
-    </div>
-  );
-}
-
 export function HeroCarousel() {
-  const [active, setActive] = useState(0);
-  const [fade, setFade] = useState(true);
+  const [current, setCurrent] = useState(0);
+  const [sliding, setSliding] = useState(false);
+  const [direction, setDirection] = useState<"left" | "right">("left");
+
+  const goNext = useCallback(() => {
+    if (sliding) return;
+    setDirection("left");
+    setSliding(true);
+    setTimeout(() => {
+      setCurrent((i) => (i + 1) % placements.length);
+      setSliding(false);
+    }, 500);
+  }, [sliding]);
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setActive((i) => (i + 1) % placements.length);
-        setFade(true);
-      }, 300);
-    }, 4000);
+    const id = setInterval(goNext, 5000);
     return () => clearInterval(id);
-  }, []);
+  }, [goNext]);
 
-  const curr = placements[active];
-  const next1 = placements[(active + 1) % placements.length];
-  const next2 = placements[(active + 2) % placements.length];
+  const goTo = (i: number) => {
+    if (sliding || i === current) return;
+    setDirection(i > current ? "left" : "right");
+    setSliding(true);
+    setTimeout(() => {
+      setCurrent(i);
+      setSliding(false);
+    }, 500);
+  };
+
+  const p = placements[current];
+
+  const slideClass = sliding
+    ? direction === "left"
+      ? "translate-x-[-40px] opacity-0"
+      : "translate-x-[40px] opacity-0"
+    : "translate-x-0 opacity-100";
 
   return (
-    <div className="relative w-full max-w-[420px] h-[180px]">
-      {/* Back card (3rd) */}
-      <div className="absolute inset-0 translate-x-4 translate-y-4 opacity-[0.15]">
-        <Card person={next2} className="shadow-sm" />
+    <div className="w-full max-w-[520px]">
+      <div className={`bg-white rounded-3xl shadow-md overflow-hidden transition-all duration-500 ease-out ${slideClass}`}>
+        <div className="flex items-stretch min-h-[260px]">
+          {/* Photo */}
+          <div className="relative w-[180px] shrink-0 bg-gradient-to-br from-coral-soft to-amber-soft">
+            <Image
+              src={p.img}
+              alt={p.name}
+              fill
+              className="object-cover"
+              sizes="180px"
+              priority
+            />
+          </div>
+
+          {/* Content — quote-led */}
+          <div className="flex-1 px-7 py-6 flex flex-col justify-center">
+            <p className="text-[17px] text-deep-purple font-medium leading-relaxed mb-5">
+              &ldquo;{p.quote}&rdquo;
+            </p>
+            <div>
+              <p className="font-bold text-[15px]">{p.name}</p>
+              <p className="text-sm text-gray-500">
+                {p.role} <span className="text-coral font-semibold">@ {p.company}</span>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      {/* Middle card (2nd) */}
-      <div className="absolute inset-0 translate-x-2 translate-y-2 opacity-30">
-        <Card person={next1} className="shadow-md" />
-      </div>
-      {/* Front card (active) */}
-      <div
-        className="absolute inset-0 transition-opacity duration-300"
-        style={{ opacity: fade ? 1 : 0 }}
-      >
-        <Card person={curr} />
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-2 mt-4">
+        {placements.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Go to placement ${i + 1}`}
+            className={`rounded-full transition-all duration-300 ${
+              i === current
+                ? "w-6 h-2 bg-coral"
+                : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
+            }`}
+          />
+        ))}
       </div>
     </div>
   );
