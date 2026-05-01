@@ -20,37 +20,40 @@ export default function AboutPage() {
 
       {/* Mission */}
       <ScrollReveal>
-        <section className="px-6 md:px-16 py-14 max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="bg-gradient-to-br from-coral/10 to-amber/10 rounded-3xl p-8 grid grid-cols-2 gap-5">
-              <div className="text-center">
-                <p className="text-3xl font-extrabold text-coral">200+</p>
-                <p className="text-xs text-gray-500 mt-1 font-medium">Young People Placed</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-extrabold text-deep-purple">94%</p>
-                <p className="text-xs text-gray-500 mt-1 font-medium">Completion Rate</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-extrabold text-amber">14</p>
-                <p className="text-xs text-gray-500 mt-1 font-medium">Day Programme</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-extrabold text-green-600">£0</p>
-                <p className="text-xs text-gray-500 mt-1 font-medium">Cost to You</p>
-              </div>
+        <section className="px-6 md:px-16 py-14 max-w-3xl mx-auto">
+          <h2 className="text-2xl font-extrabold mb-6 text-center">Our Mission</h2>
+          <p className="text-gray-600 text-lg leading-[1.85] mb-5 text-center">
+            Kennou is a structured, two-week employability programme that takes young people from disadvantaged
+            socio-economic backgrounds and gives them the skills, confidence, and connections they need to land
+            meaningful corporate roles.
+          </p>
+          <p className="text-coral text-xl font-bold text-center leading-relaxed mb-5">
+            We focus on the people who traditional career services overlook.
+          </p>
+          <p className="text-gray-600 text-lg leading-[1.85] text-center">
+            Those eligible for free school meals, living in the most deprived areas, and from low-income
+            households. If the system wasn&apos;t built for you, Kennou was.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      {/* Stats strip */}
+      <ScrollReveal>
+        <section className="px-6 md:px-16 py-12 max-w-3xl mx-auto">
+          <div className="flex items-center justify-center gap-0">
+            <div className="flex-1 text-center">
+              <p className="text-4xl md:text-5xl font-extrabold text-deep-purple">200+</p>
+              <p className="text-sm text-gray-400 mt-1">Young People Placed</p>
             </div>
-            <div>
-              <h2 className="text-2xl font-extrabold mb-4">Our Mission</h2>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Kennou is a structured, two-week employability programme that takes young people from disadvantaged
-                socio-economic backgrounds and gives them the skills, confidence, and connections they need to land
-                meaningful corporate roles.
-              </p>
-              <p className="text-gray-600 leading-relaxed">
-                We focus on the people who traditional career services overlook — those eligible for free school
-                meals, living in the most deprived areas, and from low-income households.
-              </p>
+            <div className="w-px h-14 bg-gray-200" />
+            <div className="flex-1 text-center">
+              <p className="text-4xl md:text-5xl font-extrabold text-deep-purple">94%</p>
+              <p className="text-sm text-gray-400 mt-1">Completion Rate</p>
+            </div>
+            <div className="w-px h-14 bg-gray-200" />
+            <div className="flex-1 text-center">
+              <p className="text-4xl md:text-5xl font-extrabold text-deep-purple">14</p>
+              <p className="text-sm text-gray-400 mt-1">Day Programme</p>
             </div>
           </div>
         </section>
