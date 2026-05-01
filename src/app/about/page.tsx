@@ -22,8 +22,23 @@ export default function AboutPage() {
       <ScrollReveal>
         <section className="px-6 md:px-16 py-14 max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="bg-gradient-to-br from-coral/10 to-amber/10 rounded-3xl p-10 flex items-center justify-center">
-              <span className="text-7xl">🌍</span>
+            <div className="bg-gradient-to-br from-coral/10 to-amber/10 rounded-3xl p-8 grid grid-cols-2 gap-5">
+              <div className="text-center">
+                <p className="text-3xl font-extrabold text-coral">200+</p>
+                <p className="text-xs text-gray-500 mt-1 font-medium">Young People Placed</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl font-extrabold text-deep-purple">94%</p>
+                <p className="text-xs text-gray-500 mt-1 font-medium">Completion Rate</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl font-extrabold text-amber">14</p>
+                <p className="text-xs text-gray-500 mt-1 font-medium">Day Programme</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl font-extrabold text-green-600">£0</p>
+                <p className="text-xs text-gray-500 mt-1 font-medium">Cost to You</p>
+              </div>
             </div>
             <div>
               <h2 className="text-2xl font-extrabold mb-4">Our Mission</h2>
