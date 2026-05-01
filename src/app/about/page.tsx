@@ -1,8 +1,29 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
+const stats = [
+  { value: "200+", label: "young people placed" },
+  { value: "94%", label: "completion rate" },
+  { value: "14", label: "day programme" },
+  { value: "£0", label: "cost to you" },
+];
+
 export default function AboutPage() {
+  const [statIndex, setStatIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setStatIndex((i) => (i + 1) % stats.length);
+        setFade(true);
+      }, 300);
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
   return (
     <div className="animate-fade-in">
       {/* Hero */}
@@ -22,9 +43,16 @@ export default function AboutPage() {
       <ScrollReveal>
         <section className="px-6 md:px-16 py-14 max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="bg-gradient-to-br from-coral/8 to-amber/8 rounded-3xl p-10 flex flex-col items-center justify-center text-center gap-1">
-              <p className="text-6xl md:text-7xl font-extrabold text-deep-purple leading-none">200+</p>
-              <p className="text-base text-gray-500 font-medium">young people placed into corporate roles</p>
+            <div className="bg-white rounded-3xl p-10 shadow-sm flex flex-col items-center justify-center text-center min-h-[220px]">
+              <div className={`transition-opacity duration-300 ${fade ? "opacity-100" : "opacity-0"}`}>
+                <p className="text-6xl md:text-7xl font-extrabold text-deep-purple leading-none">{stats[statIndex].value}</p>
+                <p className="text-sm text-gray-500 mt-2">{stats[statIndex].label}</p>
+              </div>
+              <div className="flex gap-1.5 mt-5">
+                {stats.map((_, i) => (
+                  <div key={i} className={`rounded-full transition-all duration-300 ${i === statIndex ? "w-5 h-1.5 bg-coral" : "w-1.5 h-1.5 bg-gray-200"}`} />
+                ))}
+              </div>
             </div>
             <div>
               <h2 className="text-2xl font-extrabold mb-4">Our Mission</h2>
@@ -33,24 +61,10 @@ export default function AboutPage() {
                 socio-economic backgrounds and gives them the skills, confidence, and connections they need to land
                 meaningful corporate roles.
               </p>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed">
                 We focus on the people who traditional career services overlook — those eligible for free school
                 meals, living in the most deprived areas, and from low-income households.
               </p>
-              <div className="flex gap-8 pt-2">
-                <div>
-                  <p className="text-2xl font-extrabold text-deep-purple">94%</p>
-                  <p className="text-xs text-gray-400">Completion Rate</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-extrabold text-deep-purple">14 days</p>
-                  <p className="text-xs text-gray-400">Programme Length</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-extrabold text-deep-purple">£0</p>
-                  <p className="text-xs text-gray-400">Cost to You</p>
-                </div>
-              </div>
             </div>
           </div>
         </section>
