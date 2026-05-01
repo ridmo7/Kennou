@@ -33,7 +33,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="flex-1 flex justify-center md:justify-end">
+        <div className="flex-1 flex justify-center md:justify-end pt-4">
           <HeroCarousel />
         </div>
       </section>

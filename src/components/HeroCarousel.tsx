@@ -4,13 +4,32 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const placements = [
-  { initials: "AK", name: "Amara K.", role: "Graduate Analyst", company: "HSBC", quote: "Kennou gave me structure when I had none.", img: "/avatars/avatar-1.jpg" },
-  { initials: "JM", name: "Jordan M.", role: "Ops Associate", company: "Deloitte", quote: "The confidence I built changed everything.", img: "/avatars/avatar-2.jpg" },
-  { initials: "PS", name: "Priya S.", role: "Junior Consultant", company: "Accenture", quote: "Kennou showed me I belonged in corporate.", img: "/avatars/avatar-3.jpg" },
-  { initials: "DW", name: "David W.", role: "Business Analyst", company: "PwC", quote: "From a council estate to PwC. Unreal.", img: "/avatars/avatar-4.jpg" },
-  { initials: "SH", name: "Safia H.", role: "Marketing Exec", company: "Unilever", quote: "Doors I didn't know existed opened up.", img: "/avatars/avatar-5.jpg" },
-  { initials: "LT", name: "Liam T.", role: "Tech Analyst", company: "KPMG", quote: "Two weeks that changed my whole trajectory.", img: "/avatars/avatar-6.jpg" },
+  { name: "Amara K.", role: "Graduate Analyst", company: "HSBC", quote: "Kennou gave me structure when I had none.", img: "/avatars/avatar-1.jpg" },
+  { name: "Jordan M.", role: "Ops Associate", company: "Deloitte", quote: "The confidence I built changed everything.", img: "/avatars/avatar-2.jpg" },
+  { name: "Priya S.", role: "Junior Consultant", company: "Accenture", quote: "Kennou showed me I belonged in corporate.", img: "/avatars/avatar-3.jpg" },
+  { name: "David W.", role: "Business Analyst", company: "PwC", quote: "From a council estate to PwC. Unreal.", img: "/avatars/avatar-4.jpg" },
+  { name: "Safia H.", role: "Marketing Exec", company: "Unilever", quote: "Doors I didn't know existed opened up.", img: "/avatars/avatar-5.jpg" },
+  { name: "Liam T.", role: "Tech Analyst", company: "KPMG", quote: "Two weeks that changed my whole trajectory.", img: "/avatars/avatar-6.jpg" },
 ];
+
+function Card({ person, className }: { person: (typeof placements)[0]; className?: string }) {
+  return (
+    <div className={`absolute inset-0 bg-white rounded-3xl shadow-lg flex items-stretch overflow-hidden ${className ?? ""}`}>
+      {/* Square photo */}
+      <div className="relative w-[140px] shrink-0 bg-gradient-to-br from-coral-soft to-amber-soft">
+        <Image src={person.img} alt={person.name} fill className="object-cover" sizes="140px" />
+      </div>
+      {/* Content */}
+      <div className="flex-1 px-5 py-5 flex flex-col justify-center min-w-0">
+        <span className="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-full self-start mb-2">Placed ✓</span>
+        <p className="font-bold text-[15px] leading-tight">{person.name}</p>
+        <p className="text-xs text-gray-500 mt-0.5">{person.role}</p>
+        <p className="text-xs font-semibold text-coral">{person.company}</p>
+        <p className="text-[13px] text-gray-400 italic mt-3 leading-relaxed">&ldquo;{person.quote}&rdquo;</p>
+      </div>
+    </div>
+  );
+}
 
 export function HeroCarousel() {
   const [active, setActive] = useState(0);
@@ -27,52 +46,26 @@ export function HeroCarousel() {
     return () => clearInterval(id);
   }, []);
 
-  const p = placements[active];
+  const curr = placements[active];
+  const next1 = placements[(active + 1) % placements.length];
+  const next2 = placements[(active + 2) % placements.length];
 
   return (
-    <div className="w-full max-w-[340px]">
-      {/* Featured profile card */}
-      <div className="bg-white rounded-3xl shadow-md overflow-hidden transition-opacity duration-300" style={{ opacity: fade ? 1 : 0 }}>
-        {/* Photo */}
-        <div className="relative w-full aspect-[4/3] bg-gradient-to-br from-coral-soft to-amber-soft">
-          <Image
-            src={p.img}
-            alt={p.name}
-            fill
-            className="object-cover"
-            sizes="340px"
-          />
-          <div className="absolute top-3 right-3">
-            <span className="text-xs font-bold text-green-700 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm">Placed ✓</span>
-          </div>
-        </div>
-
-        {/* Info */}
-        <div className="px-5 py-4">
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <p className="font-bold text-base">{p.name}</p>
-              <p className="text-sm text-gray-500">{p.role}</p>
-              <p className="text-sm font-semibold text-coral">{p.company}</p>
-            </div>
-          </div>
-          <p className="text-sm text-gray-500 italic mt-3 leading-relaxed">&ldquo;{p.quote}&rdquo;</p>
-        </div>
+    <div className="relative w-full max-w-[420px] h-[180px]">
+      {/* Back card (3rd) */}
+      <div className="absolute inset-0 translate-x-4 translate-y-4 opacity-[0.15]">
+        <Card person={next2} className="shadow-sm" />
       </div>
-
-      {/* Thumbnail strip */}
-      <div className="flex items-center justify-center gap-2 mt-4">
-        {placements.map((person, i) => (
-          <button
-            key={person.initials}
-            onClick={() => { setFade(false); setTimeout(() => { setActive(i); setFade(true); }, 200); }}
-            className={`relative w-9 h-9 rounded-full overflow-hidden transition-all duration-300 ${
-              i === active ? "ring-2 ring-coral ring-offset-2 scale-110" : "opacity-50 hover:opacity-80"
-            }`}
-          >
-            <Image src={person.img} alt={person.name} fill className="object-cover" sizes="36px" />
-          </button>
-        ))}
+      {/* Middle card (2nd) */}
+      <div className="absolute inset-0 translate-x-2 translate-y-2 opacity-30">
+        <Card person={next1} className="shadow-md" />
+      </div>
+      {/* Front card (active) */}
+      <div
+        className="absolute inset-0 transition-opacity duration-300"
+        style={{ opacity: fade ? 1 : 0 }}
+      >
+        <Card person={curr} />
       </div>
     </div>
   );
