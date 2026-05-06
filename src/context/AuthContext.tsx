@@ -1,6 +1,8 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { supabase } from "@/lib/supabase";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 interface User {
   name: string;
@@ -13,13 +15,14 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
-  signup: (data: SignupData) => Promise<{ success: boolean; eligible: boolean }>;
+  signup: (data: SignupData) => Promise<{ success: boolean; eligible: boolean; error?: string }>;
   logout: () => void;
 }
 
 interface SignupData {
   name: string;
   email: string;
+  password: string;
   age: number;
   postcode: string;
   freeSchoolMeals: boolean;
@@ -29,66 +32,82 @@ interface SignupData {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function mapSupabaseUser(su: SupabaseUser): User {
+  const meta = su.user_metadata ?? {};
+  return {
+    name: meta.name ?? su.email?.split("@")[0] ?? "User",
+    email: su.email ?? "",
+    eligible: meta.eligible ?? true,
+    signupDate: su.created_at ?? new Date().toISOString(),
+  };
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("kennou_user");
-    if (stored) {
-      setUser(JSON.parse(stored));
-    }
-    setIsLoading(false);
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        setUser(mapSupabaseUser(session.user));
+      }
+      setIsLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        setUser(mapSupabaseUser(session.user));
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const login = async (email: string, _password: string): Promise<boolean> => {
-    // Simulate network delay
-    await new Promise((r) => setTimeout(r, 1200));
-    const stored = localStorage.getItem("kennou_user");
-    if (stored) {
-      const u = JSON.parse(stored);
-      if (u.email === email) {
-        setUser(u);
-        return true;
-      }
-    }
-    // Demo fallback: allow any login with stored user
-    if (stored) {
-      setUser(JSON.parse(stored));
-      return true;
-    }
-    return false;
+  const login = async (email: string, password: string): Promise<boolean> => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    return !error;
   };
 
-  const signup = async (data: SignupData): Promise<{ success: boolean; eligible: boolean }> => {
-    await new Promise((r) => setTimeout(r, 1500));
-
-    // Eligibility check
+  const signup = async (data: SignupData): Promise<{ success: boolean; eligible: boolean; error?: string }> => {
+    // Eligibility check (client-side)
     const eligible =
       data.freeSchoolMeals ||
       data.incomeBelow30k ||
       (data.deprivation !== "" && data.deprivation !== "none");
 
-    const newUser: User = {
-      name: data.name,
-      email: data.email,
-      eligible,
-      signupDate: new Date().toISOString(),
-    };
-
-    localStorage.setItem("kennou_user", JSON.stringify(newUser));
-
-    if (eligible) {
-      // Initialize empty progress
-      localStorage.setItem("kennou_progress", JSON.stringify({}));
-      setUser(newUser);
+    if (!eligible) {
+      return { success: true, eligible: false };
     }
 
-    return { success: true, eligible };
+    const { error } = await supabase.auth.signUp({
+      email: data.email,
+      password: data.password,
+      options: {
+        data: {
+          name: data.name,
+          age: data.age,
+          postcode: data.postcode,
+          eligible: true,
+          freeSchoolMeals: data.freeSchoolMeals,
+          deprivation: data.deprivation,
+          incomeBelow30k: data.incomeBelow30k,
+        },
+      },
+    });
+
+    if (error) {
+      return { success: false, eligible: true, error: error.message };
+    }
+
+    return { success: true, eligible: true };
   };
 
-  const logout = () => {
-    localStorage.removeItem("kennou_user");
+  const logout = async () => {
+    await supabase.auth.signOut();
     setUser(null);
   };
 

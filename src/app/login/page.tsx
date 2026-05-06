@@ -29,7 +29,7 @@ export default function LoginPage() {
     if (success) {
       router.push("/dashboard");
     } else {
-      setError("No account found. Please sign up first.");
+      setError("Invalid email or password. Please try again.");
     }
   };
 

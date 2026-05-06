@@ -54,6 +54,7 @@ export default function ApplyPage() {
     const result = await signup({
       name: form.name,
       email: form.email,
+      password: form.password,
       age: Number(form.age),
       postcode: form.postcode,
       freeSchoolMeals: form.fsm === "yes",
@@ -62,8 +63,13 @@ export default function ApplyPage() {
     });
     setLoading(false);
 
+    if (!result.success) {
+      addToast(result.error || "Something went wrong. Please try again.", "error");
+      return;
+    }
+
     if (result.eligible) {
-      addToast("Welcome to Kennou! Let's get started.");
+      addToast("Welcome to Kennou! Check your email to confirm your account.");
       router.push("/dashboard");
     } else {
       setIneligible(true);
